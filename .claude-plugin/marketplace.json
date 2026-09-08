@@ -1,0 +1,14 @@
+{
+  "name": "ax-plugins",
+  "owner": {
+    "name": "AX-TF"
+  },
+  "description": "비개발자를 위한 바이브코딩 도구 모음 배포처.",
+  "plugins": [
+    {
+      "name": "ax-skills",
+      "source": "./plugins/ax-skills",
+      "description": "비개발자를 위한 바이브코딩 도우미 — 개발환경 준비, git/GitHub 사용, 쉬운 리포트 방식."
+    }
+  ]
+}
