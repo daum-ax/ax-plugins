@@ -32,8 +32,8 @@ Claude Code를 열고 채팅창에 아래를 **한 줄씩** 입력하세요.
 
 ## 잘 됐는지 확인
 
-새 대화에서 `/` 를 입력했을 때 `ax-skills:` 로 시작하는 항목들(`welcome`, `push`,
-`pull` 등)이 보이면 설치된 것입니다.
+새 대화에서 `/` 를 입력했을 때 `ax-skills:` 로 시작하는 항목들(`welcome`, `commit`,
+`push` 등)이 보이면 설치된 것입니다.
 
 처음이라면 `/ax-skills:welcome` 을 실행해 보세요 — 필요한 준비가 됐는지 확인하고
 빠진 것만 채워줍니다.
@@ -42,20 +42,14 @@ Claude Code를 열고 채팅창에 아래를 **한 줄씩** 입력하세요.
 
 | 도구 | 언제 쓰나요 |
 |---|---|
-| `/ax-skills:welcome` | 맨 처음 한 번 — 준비 상태 확인 · 팀 저장소 clone(받아오기) |
-| `/ax-skills:dev-up` | 화면이 보이는 상태까지 — README가 정한 순서대로 설치·개발 서버 켜기 · 포트 충돌 정리 |
-| `/ax-skills:status` | 지금 무슨 상태인지 모를 때 (제일 먼저 눌러보는 버튼) |
-| `/ax-skills:commit` | 작업을 내 컴퓨터에 커밋(기록) |
-| `/ax-skills:push` | 커밋한 작업을 팀 저장소(GitHub)에 push |
-| `/ax-skills:pull` | 동료가 올린 최신 작업 pull로 받아오기 |
-| `/ax-skills:fix-conflict` | 충돌(같은 곳을 두 사람이 고침) 정리 |
-| `/ax-skills:pr` | 내 작업을 동료에게 PR(확인 요청)로 올리기 · 확인되면 merge |
-| `/ax-skills:review-pr` | 동료가 보낸 PR 검토하기 · 승인 · 의견 남기기 |
+| `/ax-skills:welcome` | 맨 처음 한 번 — 준비 상태 확인 · GitHub 로그인 |
 | `/ax-skills:github-login` | GitHub 연결이 안 될 때 |
-| `/ax-skills:undo` | 실수 되돌리기 |
-| `/ax-skills:explain` | 어려운 파일·에러 메시지를 쉬운 말로 |
-| `/ax-skills:handoff` | 잠깐 쉬기 전에 지금 상황 메모해두기 |
-| `/ax-skills:record` | 중요한 작업·결정을 기록으로 남기기 |
+| `/ax-skills:commit` | 작업을 내 컴퓨터에 커밋(기록) — "커밋해줘" |
+| `/ax-skills:push` | 커밋한 작업을 GitHub에 올리기 · 저장소가 없으면 새로 만들기 — "올려줘" |
+| `/ax-skills:release` | 지금 상태를 버전(v1, v2 …)으로 남기기 · 버전 목록 보기 — "버전 남겨줘" |
+| `/ax-skills:status` | 지금 무슨 상태인지 모를 때 (제일 먼저 눌러보는 버튼) |
+
+작업 중에는 **"커밋해줘" → "올려줘" → "버전 남겨줘"** 순서로 쓰면 됩니다.
 
 리포트 방식도 함께 바뀝니다 — 결과를 알려드릴 때 **한 줄 결론 → 쉬운 설명 → 자세한
 내용은 물어보실 때만** 순서로 말합니다. 이 방식은 설치한 뒤로 **모든 프로젝트**에
@@ -112,7 +106,7 @@ Claude Code를 열고 채팅창에 아래를 **한 줄씩** 입력하세요.
 
 ```bash
 mkdir -p ~/.claude/skills
-unzip ~/Downloads/ax-skills-v0.1.0.zip -d ~/.claude/skills/
+unzip ~/Downloads/ax-skills-v0.2.0.zip -d ~/.claude/skills/
 ```
 
 **Windows** — 파일 탐색기 주소창에 `%USERPROFILE%\.claude\skills` 를 입력해 그 폴더로
