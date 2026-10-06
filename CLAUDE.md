@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 이 저장소의 성격
 
-실행되는 애플리케이션 코드가 없다. 산출물은 **Claude Code 플러그인 `ax-skills`** 이고,
+실행되는 애플리케이션 코드가 없다. 산출물은 **Claude Code 플러그인 두 개 `ax-skills`·`ax-deploy`** 이고,
 내용물은 전부 Markdown 지시문이다. 빌드·테스트 프레임워크가 없고, "단일 테스트 실행"에
 해당하는 개념도 없다 — 검증은 `scripts/check.sh` 하나다.
 
@@ -22,10 +22,13 @@ claude --plugin-dir plugins/ax-skills         # 설치 없이 현재 세션에�
 
 `scripts/check.sh` 가 하는 일은 네 가지다.
 
-1. `claude plugin validate --strict` 3회 (plugin / skills / marketplace.json)
+1. `claude plugin validate --strict` — `plugins/*/` 마다 플러그인·`skills/` 2회 + marketplace.json 1회 (지금 5회)
 2. **유출 문자열 검사 — 저장소 전체.** 개인 계정·회사 도메인·홈 디렉터리 절대경로·내부
    저장소 이름. 루트에 새로 추가하는 문서도 이 검사를 받는다. 예시 경로를 쓸 일이 있으면
    `/절대/경로/ax-plugins` 처럼 자리표시자로 적는다.
+   **예외(2026-10-06):** `plugins/ax-deploy/` 는 사내 배포 포털에 연결하는 플러그인이라 포털
+   주소(회사 도메인)를 `plugin.json` 의 `userConfig.portal_url.default` 와 그 README 에 적는다 —
+   이 경로 밖으로는 번지지 않고, 유출 정규식은 바꾸지 않았다(`docs/decisions/0004-ax-deploy-static-token.md`).
 3. **옛 이름·자리표시자 검사 — 배포 payload 한정** (`plugins`, `.claude-plugin`,
    `README.md`, `.github`). `CONTRIBUTING.md`·`CHANGELOG.md`·`docs/decisions/`·`CLAUDE.md`
    는 자매 플러그인 이름(`jay-skills`)을 적어도 되는 자리라 이 검사에서 빠져 있다.
@@ -37,16 +40,20 @@ claude --plugin-dir plugins/ax-skills         # 설치 없이 현재 세션에�
 
 ## 구조
 
-2단 구성이다. 저장소 루트가 marketplace, `plugins/ax-skills/` 가 플러그인이다.
+2단 구성이다. 저장소 루트가 marketplace, `plugins/ax-skills/`·`plugins/ax-deploy/` 가 플러그인이다.
 
 ```
-.claude-plugin/marketplace.json          # marketplace 정의 — plugins[] 가 ./plugins/ax-skills 를 가리킨다
+.claude-plugin/marketplace.json          # marketplace 정의 — plugins[] 가 ./plugins/ax-skills · ./plugins/ax-deploy 를 가리킨다
 plugins/ax-skills/
   .claude-plugin/plugin.json             # 플러그인 메타 + version (릴리즈 태그와 반드시 일치)
   skills/<name>/SKILL.md                 # 스킬 6개. 이것이 제품 본체
   references/git-collab.md               # git 스킬 공용 참조 (번호 붙은 §)
   rules/reporting.md                     # 리포트 독트린 SSOT (항상 로드)
   output-styles/progressive-report.md    # 같은 독트린의 output-style mirror
+plugins/ax-deploy/
+  .claude-plugin/plugin.json             # userConfig(포털 주소·토큰) + mcpServers(원격 MCP)
+  skills/deploy/SKILL.md                 # 트리거 표면만 — 절차는 포털이 정본
+  README.md                              # 설치·안 될 때·OAuth 전환 지점
 docs/decisions/                          # 왜 그렇게 정했는지 (배포되지만 사용자용은 아님)
 ```
 
@@ -106,6 +113,8 @@ byte 단위로 같아도 검사가 깨진다** — 그리고 "머리말 길이�
   접두어와 경로가 가장 자주 틀린다.
 - 사용자 대상 문서는 한국어, 비개발자 독자 기준. 영어 기술 용어는 원형을 쓰되 첫 등장에서
   한 줄로 푼다 (§1).
+- **ax-deploy 에는 포털 규칙을 적지 않는다.** 배포 절차·태그·재시도·오류 안내의 정본은 포털 MCP 의
+  `deploy` 도구 설명과 오류 hint 다(0004).
 
 ## 여러 파일을 함께 고쳐야 하는 변경
 
@@ -117,12 +126,14 @@ byte 단위로 같아도 검사가 깨진다** — 그리고 "머리말 길이�
   내야 한다. 접두어 없이 이름만 적은 곳(에러 번역표의 담당 열 등)은 이 grep 에 안 걸린다.
 - **리포트 독트린 수정** → `rules/reporting.md` + `output-styles/progressive-report.md`,
   같은 커밋.
+- **ax-deploy 변경** → `plugins/ax-deploy/.claude-plugin/plugin.json` 버전 + `CHANGELOG.md` 의 ax-deploy 절 +
+  루트 `README.md` 표. zip 은 만들지 않는다(MCP 설정이라 수동 설치 경로가 없다).
 
 ## 릴리즈
 
 절차 전체는 `CONTRIBUTING.md`. 조용히 실패하는 두 가지만 여기 적는다.
 
-- `plugin.json` 의 `version` 이 태그(`ax-skills/vX.Y.Z`)와 **다르면** 사용자 쪽
+- 각 플러그인의 `plugin.json` `version` 이 그 태그(`ax-skills/vX.Y.Z`, `ax-deploy/vX.Y.Z`)와 **다르면** 사용자 쪽
   `/plugin update` 가 "이미 최신"이라며 아무것도 하지 않는다.
 - GitHub Release 에 붙이는 zip 은 **최상위 폴더가 `ax-skills/`** 여야 `~/.claude/skills/`
   에 그대로 풀어 쓰는 수동 설치가 동작한다.
