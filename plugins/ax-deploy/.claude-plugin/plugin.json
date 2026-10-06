@@ -1,0 +1,32 @@
+{
+  "name": "ax-deploy",
+  "displayName": "ax-deploy (베타)",
+  "version": "0.1.0",
+  "description": "사내 배포 포털 연결 — 설치 때 포털 주소와 배포 토큰을 한 번 넣으면, 작업 폴더에서 \"배포해줘\"로 배포하고 링크를 받습니다. 배포 절차는 포털이 정합니다.",
+  "author": { "name": "AX-TF" },
+  "license": "UNLICENSED",
+  "dependencies": ["ax-skills"],
+  "userConfig": {
+    "portal_url": {
+      "type": "string",
+      "title": "포털 주소",
+      "description": "사내 배포 포털 주소(https://…). 기본값은 개발용 포털 — 안내받은 주소가 있으면 바꿔 주세요.",
+      "required": true,
+      "default": "https://deploy-dev.daumapps.com"
+    },
+    "token": {
+      "type": "string",
+      "title": "배포 토큰",
+      "description": "포털 시작하기 화면에서 발급한 토큰(axd_ 로 시작). 키체인에 저장됩니다.",
+      "required": true,
+      "sensitive": true
+    }
+  },
+  "mcpServers": {
+    "ax-deploy": {
+      "type": "http",
+      "url": "${user_config.portal_url}/api/mcp",
+      "headers": { "Authorization": "Bearer ${user_config.token}" }
+    }
+  }
+}
