@@ -1,6 +1,6 @@
 ---
 name: status
-description: 지금 git 저장소가 무슨 상태인지 쉬운 한국어로 알려주는 진단 도구. "지금 어떤 상태예요?" / "뭔가 꼬인 것 같아요" / "제 작업 어디 갔어요?" / "이 에러가 뭐예요?" / git 관련해서 어디서부터 시작할지 모를 때 먼저 실행. 읽기만 하고 아무것도 바꾸지 않아요. 결과에 따라 알맞은 스킬(push, pull, fix-conflict, undo, github-login, review-pr)로 안내합니다.
+description: 지금 git 저장소가 무슨 상태인지 쉬운 한국어로 알려주는 진단 도구. "지금 어떤 상태예요?" / "뭔가 꼬인 것 같아요" / "제 작업 어디 갔어요?" / "이 에러가 뭐예요?" / git 관련해서 어디서부터 시작할지 모를 때 먼저 실행. 읽기만 하고 아무것도 바꾸지 않아요. 결과에 따라 알맞은 스킬(commit, push, release, github-login, welcome)로 안내합니다.
 ---
 
 # 지금 상태 보기 (status)
@@ -34,8 +34,8 @@ command -v gh >/dev/null && gh auth status 2>&1     # 참고용 (판정은 --hos
 ```
 
 **네트워크는 건드리지 않는다** — `git fetch`도 하지 않는다. 그래서 "팀 저장소의 최신
-상황"은 알 수 없고, 그 사실을 정직하게 말한다: "팀 저장소에 새로 올라온 게 있는지까지
-보려면 `/ax-skills:pull`을 실행하세요."
+상황"은 알 수 없고, 그 사실을 정직하게 말한다: "팀 저장소에 새로 올라온 게 있는지는
+여기서 확인하지 않아요 — 올릴 때(`/ax-skills:push`) 확인합니다."
 
 사용자가 에러 메시지를 함께 붙여넣었다면 `git-collab.md` §3 번역표로 해석한다.
 
@@ -49,12 +49,16 @@ command -v gh >/dev/null && gh auth status 2>&1     # 참고용 (판정은 --hos
 > 해주는 도구인데, 이 폴더엔 그 기록장이 없는 상태예요.
 > - 템플릿 zip을 풀어서 시작하신 거라면 → `/ax-skills:welcome`을 먼저 실행하세요.
 > - 원래 GitHub에 있는 프로젝트인데 **웹에서 'Download ZIP'으로 받으셨다면** 이력이
->   통째로 빠진 사본이라 push가 안 돼요. 저장소를 만든 동료에게 clone(이력까지 통째로
->   복사해 오는 것) 주소를 물어보시는 게 가장 빠릅니다."
+>   통째로 빠진 사본이에요. 이 폴더를 새 작업으로 시작하는 게 아니라면, 지금 상태를
+>   그대로 두고 저장소를 만든 사람에게 물어보세요."
 
-**(b) merge 중 / rebase 중** (`.git/MERGE_HEAD` 또는 `rebase-*` 존재)
+**(b) merge 중 / rebase 중 / 충돌** (`.git/MERGE_HEAD` 또는 `rebase-*` 존재, 또는
+`git status`에 충돌 파일)
 
-→ 상세 설명 없이 `/ax-skills:fix-conflict`로 넘긴다. 그 스킬이 중단·정리를 모두 담당한다.
+> "협업 기능이 필요한 상태예요 — 두 작업을 하나로 모으는 도중에 멈춰 있어요. 지금 상태를
+> 그대로 두고 저장소를 만든 사람에게 물어보세요. 그대로 두면 아무것도 망가지지 않아요."
+
+여기서 멈춘다. 이 스킬은 정리를 시도하지 않는다.
 
 **(c) 기록 열람 모드** (detached HEAD)
 
@@ -71,7 +75,7 @@ command -v gh >/dev/null && gh auth status 2>&1     # 참고용 (판정은 --hos
 
 ```
 ### 지금 상태
-- 지금 브랜치: `feature/room-booking-list` (main이 아니라 안전한 작업 공간이에요)
+- 지금 브랜치: `main`
 - 커밋 안 된 변경: 3개 파일
 - 내 컴퓨터에만 있는 커밋: 2건 (아직 push 안 함)
 - 팀 저장소: 연결됨 (github.com/회사/저장소)
@@ -88,14 +92,13 @@ command -v gh >/dev/null && gh auth status 2>&1     # 참고용 (판정은 --hos
 |---|---|
 | 커밋 안 된 변경 있음 | `/ax-skills:commit` — 지금까지 작업을 커밋 |
 | 내 컴퓨터에만 있는 커밋 있음 | `/ax-skills:push` — 팀 저장소로 push |
-| 팀 저장소 미연결 | `/ax-skills:welcome` 또는 `/ax-skills:push`(주소 물어봄) |
+| 팀 저장소 미연결 | `/ax-skills:push` — 처음 올릴 때 비공개 저장소를 새로 만들어요 |
+| 전부 올라가 있고 배포할 만한 상태 | `/ax-skills:release` — 버전 남기기 |
 | `gh` 미설치·미로그인 + 올릴 게 있음 | `/ax-skills:github-login` |
-| 충돌 · merge 중 | `/ax-skills:fix-conflict` |
-| 뭔가 잘못 커밋한 것 같다 | `/ax-skills:undo` |
-| 내가 push한 작업을 확인받고 싶다 | `/ax-skills:pr` |
-| 동료가 보낸 PR을 봐야 한다 | `/ax-skills:review-pr` |
-| 서버가 안 뜬다 · 포트가 사용 중 · 화면이 안 열린다 | `/ax-skills:dev-up` |
-| 에러 메시지가 git과 무관 | `/ax-skills:explain` |
+| git·이름·이메일 준비가 덜 됨 | `/ax-skills:welcome` |
+| 충돌 · merge 중 · 동료 작업 받아오기 · PR이 필요해 보임 | "협업 기능이 필요한 상태예요 — 지금 상태를 그대로 두고 저장소를 만든 사람에게 물어보세요" 로 멈춘다 |
+| 방금 Claude가 고친 파일을 예전으로 되돌리고 싶다 | Claude Code의 `/rewind`(이 대화에서 Claude가 고친 파일을 이전 시점으로 되감기 — 커밋은 되돌리지 않는다) 안내 |
+| 뭔가 잘못 커밋했거나 잘못 올린 것 같다 | 지금 상태를 그대로 두고 저장소를 만든 사람에게 물어보기 — 이 도구 모음은 이력을 고치지 않는다 |
 
 `git-collab.md` §2 마무리 카드로 끝낸다.
 

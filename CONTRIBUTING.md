@@ -12,11 +12,9 @@
 - **리포트 방식은 두 파일이 한 쌍.** `plugins/ax-skills/rules/reporting.md` 가 원본(SSOT),
   `plugins/ax-skills/output-styles/progressive-report.md` 는 같은 본문의 output-style 형태(mirror).
   **한 커밋에서 함께** 고칩니다. `scripts/check.sh` 가 본문 일치를 확인합니다.
-- **개발자가 없는 팀을 가정합니다.** 확인도 merge 도 동료끼리. "개발자에게 물어보세요"라고
-  쓰지 않습니다 — `plugins/ax-skills/references/git-collab.md` §0 참고.
-- **dev-up 은 스택을 가정하지 않습니다.** README 가 적어 둔 명령만 실행하고, 스택별 절차는
-  `references/<스택>.md` 레시피로 둡니다 (지금은 `node-volta.md` 하나). 새 스택을 지원하려면
-  레시피 파일을 추가하고 dev-up Step 1 의 표에 한 줄 더하면 됩니다.
+- **혼자 작업하는 사람이 기본입니다.** `push` 는 지금 브랜치에 그대로 올리고, PR·pull·충돌
+  정리는 후속 협업 팩으로 떼어 두었습니다. "개발자에게 물어보세요"라고 쓰지 않습니다 —
+  `plugins/ax-skills/references/git-collab.md` §0 참고. 배경은 `docs/decisions/0003-solo-core.md`.
 - 스킬 본문은 그 스킬이 실행될 때 통째로 읽히는 지시문입니다. 내력·날짜·"왜 그렇게 정했나"
   에세이는 본문에 넣지 말고 `docs/decisions/` 에 짧게 남깁니다.
 
