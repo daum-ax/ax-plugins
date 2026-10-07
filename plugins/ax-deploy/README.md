@@ -24,8 +24,9 @@
    ax-deploy 가 들어간 줄이 `✔ Connected` 면 준비 끝이에요.
 
 이미 터미널 명령(`claude mcp add … ax-deploy …`)으로 연결해 둔 적이 있으면 먼저
-`claude mcp remove ax-deploy -s user` 로 지우세요 — 둘 다 있으면 예전 연결이 플러그인 연결을
-가려요.
+`claude mcp remove ax-deploy -s user` 로 지우고, 포털에서 토큰을 **재발급**해 그 새 토큰으로
+설치하세요 — 예전 토큰은 그 연결 안에만 있어서 지우면 다시 볼 수 없고, 둘 다 두면 예전 연결이
+플러그인 연결을 가려요.
 
 ## 쓰기
 
