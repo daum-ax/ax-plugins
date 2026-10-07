@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 # 배포 전 검사 — 로컬과 CI가 같은 스크립트를 쓴다.
-#   1) 플러그인·스킬·marketplace 구조 검증 (claude plugin validate --strict)
+#   1) 플러그인·스킬·marketplace 구조 검증 (claude plugin validate --strict) — plugins/ 아래 플러그인 전부
 #   2) 공개 저장소에 들어가면 안 되는 문자열 검사 (개인 경로·옛 이름·자리표시자·옛 예시)
 # 이 저장소는 marketplace 로 등록되면 통째로 사용자 컴퓨터에 clone 되므로 2)를 통과하지 못하면 배포하지 않는다.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-PLUGIN=ax-skills
+PLUGIN=ax-skills   # 리포트 독트린 mirror diff 전용 — validate 는 plugins/* 전부
 
 if command -v claude >/dev/null 2>&1; then
   echo "→ validate"
-  claude plugin validate "plugins/$PLUGIN" --strict
-  claude plugin validate "plugins/$PLUGIN/skills" --strict
+  for p in plugins/*/; do
+    claude plugin validate "$p" --strict
+    if [ -d "$p/skills" ]; then claude plugin validate "$p/skills" --strict; fi
+  done
   claude plugin validate .claude-plugin/marketplace.json --strict
 else
   echo "warn: claude CLI 없음 — validate 건너뜀 (로컬에서는 반드시 실행할 것)" >&2

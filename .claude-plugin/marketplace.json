@@ -9,6 +9,11 @@
       "name": "ax-skills",
       "source": "./plugins/ax-skills",
       "description": "비개발자를 위한 바이브코딩 도우미 — 처음 준비, 커밋·push·버전 남기기, 쉬운 리포트 방식."
+    },
+    {
+      "name": "ax-deploy",
+      "source": "./plugins/ax-deploy",
+      "description": "사내 배포 포털 연결 — 설치 때 주소·토큰 한 번, 그 뒤 \"배포해줘\"."
     }
   ]
 }
