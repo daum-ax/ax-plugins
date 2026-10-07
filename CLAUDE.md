@@ -27,7 +27,7 @@ claude --plugin-dir plugins/ax-skills         # 설치 없이 현재 세션에�
    저장소 이름. 루트에 새로 추가하는 문서도 이 검사를 받는다. 예시 경로를 쓸 일이 있으면
    `/절대/경로/ax-plugins` 처럼 자리표시자로 적는다.
    **예외(2026-10-06):** `plugins/ax-deploy/` 는 사내 배포 포털에 연결하는 플러그인이라 포털
-   주소(회사 도메인)를 `plugin.json` 의 `userConfig.portal_url.default` 와 그 README 에 적는다 —
+   주소(회사 도메인)를 `plugin.json` 의 `mcpServers.ax-deploy.url` 과 그 README 에 적는다 —
    이 경로 밖으로는 번지지 않고, 유출 정규식은 바꾸지 않았다(`docs/decisions/0004-ax-deploy-static-token.md`).
 3. **옛 이름·자리표시자 검사 — 배포 payload 한정** (`plugins`, `.claude-plugin`,
    `README.md`, `.github`). `CONTRIBUTING.md`·`CHANGELOG.md`·`docs/decisions/`·`CLAUDE.md`
@@ -51,7 +51,7 @@ plugins/ax-skills/
   rules/reporting.md                     # 리포트 독트린 SSOT (항상 로드)
   output-styles/progressive-report.md    # 같은 독트린의 output-style mirror
 plugins/ax-deploy/
-  .claude-plugin/plugin.json             # userConfig(포털 주소·토큰) + mcpServers(원격 MCP)
+  .claude-plugin/plugin.json             # userConfig(토큰) + mcpServers(원격 MCP 주소 고정)
   skills/deploy/SKILL.md                 # 트리거 표면만 — 절차는 포털이 정본
   README.md                              # 설치·안 될 때·OAuth 전환 지점
 docs/decisions/                          # 왜 그렇게 정했는지 (배포되지만 사용자용은 아님)

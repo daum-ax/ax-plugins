@@ -5,7 +5,7 @@
 | 플러그인 | 하는 일 | 설치 줄 |
 |---|---|---|
 | `ax-skills` | git 도우미 — 처음 준비, 커밋·push·버전 남기기 | `/plugin install ax-skills@ax-plugins` |
-| `ax-deploy` (베타) | 사내 배포 포털 연결 — 설치 때 주소·토큰 한 번, 그 뒤 "배포해줘" (`ax-skills` 를 함께 설치) | `/plugin install ax-deploy@ax-plugins` |
+| `ax-deploy` (베타) | 사내 배포 포털 연결 — 설치 때 토큰 한 번, 그 뒤 "배포해줘" (`ax-skills` 를 함께 설치) | `/plugin install ax-deploy@ax-plugins` |
 
 ## 설치
 

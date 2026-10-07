@@ -13,7 +13,7 @@
     {
       "name": "ax-deploy",
       "source": "./plugins/ax-deploy",
-      "description": "사내 배포 포털 연결 — 설치 때 주소·토큰 한 번, 그 뒤 \"배포해줘\"."
+      "description": "사내 배포 포털 연결 — 설치 때 토큰 한 번, 그 뒤 \"배포해줘\"."
     }
   ]
 }
