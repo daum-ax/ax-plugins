@@ -228,6 +228,9 @@ HOST=$(git remote get-url origin 2>/dev/null \
   base 브랜치 선택, 잠금 파일(`package-lock.json`·`yarn.lock`·`pnpm-lock.yaml`·`poetry.lock`·`Pipfile.lock`) 충돌 처리.
   잠금 파일은 동료 버전을 그대로 받고, 정했다는 사실만 알려준다 — 사람이 고를 내용이
   아니다.
+- 기록에서 빼는 파일 — `.claude/`, `.env`·`.env.*`(`.env.example` 은 올림), `node_modules/`,
+  `.DS_Store`. `commit` 이 `.gitignore` 에 없는 줄만 덧붙인다. 사용자 정보(이름·이메일)는
+  아무 값도 없을 때만 `welcome` 이 `--global` 로 등록한다.
 - **저장소 이름과 브랜치 이름은 영문 소문자와 하이픈만 쓴다** — `room-booking`,
   `feature/room-booking-list`. 이름은 GitHub 주소에 그대로 들어가는데, 한글이 섞이면 주소가
   `%ED%95%9C%EA%B8%80` 같은 알아볼 수 없는 형태로 바뀐다(실측). 작업 내용이 한국어면 그
