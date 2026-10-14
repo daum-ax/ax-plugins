@@ -127,16 +127,17 @@ byte 단위로 같아도 검사가 깨진다** — 그리고 "머리말 길이�
 - **리포트 독트린 수정** → `rules/reporting.md` + `output-styles/progressive-report.md`,
   같은 커밋.
 - **ax-deploy 변경** → `plugins/ax-deploy/.claude-plugin/plugin.json` 버전 + `CHANGELOG.md` 의 ax-deploy 절 +
-  루트 `README.md` 표. zip 은 만들지 않는다(MCP 설정이라 수동 설치 경로가 없다).
+  루트 `README.md` 표.
 
 ## 릴리즈
 
-절차 전체는 `CONTRIBUTING.md`. 조용히 실패하는 두 가지만 여기 적는다.
+절차 전체는 `CONTRIBUTING.md`. 조용히 실패하는 것 하나만 여기 적는다.
 
 - 각 플러그인의 `plugin.json` `version` 이 그 태그(`ax-skills/vX.Y.Z`, `ax-deploy/vX.Y.Z`)와 **다르면** 사용자 쪽
   `/plugin update` 가 "이미 최신"이라며 아무것도 하지 않는다.
-- GitHub Release 에 붙이는 zip 은 **최상위 폴더가 `ax-skills/`** 여야 `~/.claude/skills/`
-  에 그대로 풀어 쓰는 수동 설치가 동작한다.
+
+설치 경로는 marketplace 하나다. zip 수동 설치는 2026-10-14 에 없앴다 — 포털 배포가 GitHub 을
+전제하고, `ax-deploy` 는 원래 zip 으로 설치할 수 없었으며, Release 는 0.1.0 이후 갱신되지 않았다.
 
 버전 규칙: 새 스킬·rule·output-style **파일**이 생기면 MINOR, 기존 파일 편집만이면 PATCH.
 

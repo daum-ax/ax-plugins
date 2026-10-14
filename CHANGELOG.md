@@ -2,6 +2,18 @@
 
 형식: 플러그인 · 버전 · 날짜 · 바뀐 것 · 자매 플러그인(jay-skills) 반영 여부. 2026-10-06 부터 플러그인 이름을 머리말에 붙인다 — 그 전 항목은 전부 `ax-skills`.
 
+## 문서 — 2026-10-14 · zip 수동 설치 폐지
+
+플러그인 버전은 그대로입니다(설치된 스킬 파일은 바뀌지 않음).
+
+- GitHub 이 막힌 환경을 위한 zip 설치 안내를 없앴습니다(`plugins/ax-skills/INSTALL.md`·README·CONTRIBUTING·CLAUDE.md).
+  사내 배포 포털이 GitHub 저장소에서 앱을 가져가므로 GitHub 이 막히면 배포도 할 수 없고,
+  `ax-deploy` 는 원래 zip 으로 설치할 수 없었으며, GitHub Release 의 zip 은 0.1.0 이후 갱신되지 않았습니다.
+- 설치 경로는 `/plugin marketplace add daum-ax/ax-plugins` 하나입니다. 기존 `ax-skills v0.1.0` Release 에는
+  지원 종료를 적었습니다.
+
+자매 반영: `해당 없음`
+
 ## ax-skills 0.2.1 — 2026-10-14
 
 처음 쓰는 사람 시나리오(git 도 GitHub 저장소도 없는 폴더 → 배포)를 실제로 돌려 보고 고친 두 가지.
