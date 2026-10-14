@@ -1,31 +1,27 @@
 # ax-deploy (베타)
 
-작업 폴더를 사내 배포 포털에 올리고 링크를 받는 연결 플러그인이에요. 설치할 때 배포 토큰을
-한 번 넣으면, 그 뒤엔 Claude 에게 "배포해줘"라고 말하는 게 전부예요.
+작업 폴더를 사내 배포 포털에 올리고 링크를 받는 연결 플러그인이에요. 설치할 때 넣을 토큰은
+없어요 — 처음 한 번 `/mcp` 에서 브라우저 로그인(회사 Google)하면, 그 뒤엔 Claude 에게
+"배포해줘"라고 말하는 게 전부예요.
 
 배포 절차는 포털이 정합니다 — 이 플러그인에는 절차가 없어요. 포털이 알려주는 순서(커밋 확인 →
 버전 태그 → 배포 → 결과 확인)를 Claude 가 그대로 따릅니다.
 
 ## 설치
 
-1. 포털의 **시작하기** 화면(`https://deploy-dev.daumapps.com`)에서 **배포 토큰**을
-   발급하고 복사해요. 토큰은 `axd_` 로 시작하고, 화면에 딱 한 번만 보여요.
-2. Claude Code 채팅창에 한 줄씩 입력해요.
+1. Claude Code 채팅창에 한 줄씩 입력해요. 설치 창은 뜨지 않아요.
    ```
    /plugin marketplace add daum-ax/ax-plugins
    /plugin install ax-deploy@ax-plugins
    ```
-   설치 창이 **배포 토큰**을 물어요 — 1번에서 복사한 값을 붙여넣기. 포털 주소는 플러그인에
-   들어 있어서 따로 넣지 않아요.
-
    커밋·push·버전 남기기 도우미 `ax-skills` 도 함께 설치돼요.
-3. Claude Code 를 완전히 껐다가 다시 켜요. 터미널에서 `claude mcp list` 를 실행했을 때
-   ax-deploy 가 들어간 줄이 `✔ Connected` 면 준비 끝이에요.
+2. Claude Code 를 완전히 껐다가 다시 켜요.
+3. `/mcp` 를 입력하고 **ax-deploy** 를 고른 뒤 **Authenticate** 를 눌러요. 브라우저가 열리면
+   회사 Google 계정으로 로그인하고 **허락**을 누르면 Claude Code 로 돌아와 연결이 끝나요.
+   터미널에서 `claude mcp list` 를 실행했을 때 ax-deploy 가 들어간 줄이 `✔ Connected` 면 준비 끝이에요.
 
 이미 터미널 명령(`claude mcp add … ax-deploy …`)으로 연결해 둔 적이 있으면 먼저
-`claude mcp remove ax-deploy -s user` 로 지우고, 포털에서 토큰을 **재발급**해 그 새 토큰으로
-설치하세요 — 예전 토큰은 그 연결 안에만 있어서 지우면 다시 볼 수 없고, 둘 다 두면 예전 연결이
-플러그인 연결을 가려요.
+`claude mcp remove ax-deploy -s user` 로 지우세요 — 둘 다 두면 예전 연결이 플러그인 연결을 가려요.
 
 ## 쓰기
 
@@ -40,17 +36,14 @@
 
 - **연결이 안 돼요 (503, "Web Page Blocked", HTML 응답)** → VPN 이 켜져 있으면 끄고 `/mcp` 에서
   ax-deploy 를 다시 연결해 주세요.
-- **인증 오류(401)가 나요 / 토큰을 잃어버렸어요** → 포털 시작하기에서 토큰을 재발급하고,
-  `/plugin` 화면에서 ax-deploy 를 골라 설정(Configure)에 새 토큰을 넣어요. 재발급하면 이전
-  토큰은 바로 무효가 돼요.
+- **브라우저가 안 열려요** → 터미널에 찍힌 주소를 복사해 브라우저에서 직접 열어요.
+- **인증 오류(401)가 나요** → `/mcp` 에서 ax-deploy 를 골라 **Authenticate** 를 다시 해요. 90일 동안
+  안 쓰면 다시 로그인해야 하고, 포털 시작하기 화면에서 그 기기 연결을 끊었을 때도 마찬가지예요.
 
-## 토큰은 어디에 저장되나
+## 0.1.x 에서 올라왔다면
 
-설치 창에 넣은 토큰은 컴퓨터의 키체인(운영체제 비밀번호 저장소)에 들어가고, 설정 파일에는
-아무것도 남지 않아요.
+1. `/plugin update ax-deploy@ax-plugins` (또는 지웠다가 다시 설치)
+2. Claude Code 를 다시 켜고 `/mcp` 에서 ax-deploy → **Authenticate** 한 번.
 
-## 나중에 OAuth 로 바꿀 때 (관리자용)
-
-`.claude-plugin/plugin.json` 에서 두 곳만 고쳐요: `userConfig.token` 항목 삭제,
-`mcpServers.ax-deploy.headers` 블록 삭제. `url` 은 그대로 둬요. 그 뒤 사용자는
-`/mcp` 에서 로그인 한 번이면 돼요.
+예전에 넣은 토큰은 이제 쓰이지 않아요. 포털에서 따로 할 일은 없어요(그 토큰은 다른 도구용으로
+그대로 유효).

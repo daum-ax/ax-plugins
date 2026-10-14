@@ -51,9 +51,9 @@ plugins/ax-skills/
   rules/reporting.md                     # 리포트 독트린 SSOT (항상 로드)
   output-styles/progressive-report.md    # 같은 독트린의 output-style mirror
 plugins/ax-deploy/
-  .claude-plugin/plugin.json             # userConfig(토큰) + mcpServers(원격 MCP 주소 고정)
+  .claude-plugin/plugin.json             # mcpServers(원격 MCP 주소 고정) — 인증은 OAuth(/mcp Authenticate), 설치 창 없음(0.2.0)
   skills/deploy/SKILL.md                 # 트리거 표면만 — 절차는 포털이 정본
-  README.md                              # 설치·안 될 때·OAuth 전환 지점
+  README.md                              # 설치·안 될 때·0.1.x 에서 올라오기
 docs/decisions/                          # 왜 그렇게 정했는지 (배포되지만 사용자용은 아님)
 ```
 

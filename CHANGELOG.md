@@ -2,6 +2,17 @@
 
 형식: 플러그인 · 버전 · 날짜 · 바뀐 것 · 자매 플러그인(jay-skills) 반영 여부. 2026-10-06 부터 플러그인 이름을 머리말에 붙인다 — 그 전 항목은 전부 `ax-skills`.
 
+## ax-deploy 0.2.0 — 2026-10-14
+
+- **설치 창이 없어졌습니다.** 토큰 대신 `/mcp` → ax-deploy → **Authenticate** 로 브라우저에서 회사
+  Google 로그인·허락 한 번이면 연결됩니다. `userConfig.token` 과 `mcpServers.ax-deploy.headers` 를
+  지웠고 `url` 은 그대로입니다.
+- 0.1.x 사용자는 `/plugin update` 뒤 Authenticate 한 번. 예전 토큰은 포털에서 계속 유효합니다(다른 도구용).
+- 401 안내가 "토큰 재발급" 에서 "`/mcp` 에서 Authenticate 다시" 로 바뀌었습니다(`skills/deploy/SKILL.md`).
+- 포털 쪽: 2026-10-14 OAuth 인가 서버, 같은 날 dev 에서 Claude Code Authenticate 실측.
+
+자매 반영: `해당 없음`
+
 ## ax-deploy 0.1.1 — 2026-10-07
 
 - 설치 창에서 **포털 주소 칸을 없앴습니다.** 0.1.0 은 주소 칸에 기본값을 넣어 두었지만, 설치·설정

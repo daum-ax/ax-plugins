@@ -26,4 +26,8 @@
 `mcpServers.ax-deploy.url` 에 고정하고 입력 칸을 없앴다 — 회사 도메인 예외의 범위
 (`plugins/ax-deploy/`)는 그대로다.
 
+**2026-10-14 OAuth 로 전환 (0.2.0).** 포털이 OAuth 인가 서버가 되어(같은 날 dev 에서 Claude Code
+Authenticate 실측), 위에 적어 둔 대로 `userConfig.token` 과 `headers` 만 지웠다. 정적 토큰은 포털에서
+계속 유효하다(다른 도구·플러그인 없는 연결용).
+
 배경 문서: 배포 포털 저장소의 책임 분할 문서 §5 결정 1.
