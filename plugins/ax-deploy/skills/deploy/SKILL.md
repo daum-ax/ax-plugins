@@ -9,6 +9,6 @@ description: 현재 작업 폴더를 사내 배포 포털에 배포하고 링크
 
 1. `ax-deploy` MCP 서버의 `deploy` 도구 설명(description)에 적힌 "절차"를 그대로 따른다. 오류 응답의 `hint` 와 `get_status` · `get_logs` 가 다음 행동을 알려준다.
 2. `ax-deploy` 의 도구가 보이지 않거나, 호출이 연결 오류 · HTML 응답 · 503 으로 실패하면 멈추고 안내한다: "VPN 이 켜져 있으면 끄고 `/mcp` 에서 ax-deploy 를 다시 연결해 주세요." 그래도 안 되면 포털 시작하기 화면의 "안 될 때".
-3. 도구 호출이 인증 오류(401 · unauthorized)로 실패하면: 포털 시작하기 화면에서 토큰을 재발급하고 `/plugin` 에서 ax-deploy 를 골라 설정에 새 토큰을 넣도록 안내한다.
+3. 도구 호출이 인증 오류(401 · unauthorized)로 실패하면: "`/mcp` 에서 ax-deploy 를 골라 Authenticate 를 다시 해 주세요(브라우저 로그인 한 번)." 라고 안내한다.
 
 절대 하지 않는 것: 브라우저 · 다른 CLI · 직접 API 호출로 배포하기. 배포 절차나 버전 규칙을 여기에 적기.
