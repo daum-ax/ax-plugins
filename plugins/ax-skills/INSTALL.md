@@ -68,7 +68,7 @@ Claude Code를 열고 채팅창에 아래를 **한 줄씩** 입력하세요.
 /plugin update ax-skills@ax-plugins
 ```
 
-`0.1.0 에서 0.2.0 으로 업데이트했습니다` 처럼 버전이 바뀌었다는 메시지가 나오면 끝이에요.
+`0.2.0 에서 0.2.1 로 업데이트했습니다` 처럼 버전이 바뀌었다는 메시지가 나오면 끝이에요.
 그다음 Claude Code를 완전히 껐다 켜야 적용됩니다.
 
 **두 줄 다 필요합니다.** 첫 줄은 "새 버전이 나왔는지 목록만 새로고침"하는 것이고 실제로
@@ -106,7 +106,7 @@ Claude Code를 열고 채팅창에 아래를 **한 줄씩** 입력하세요.
 
 ```bash
 mkdir -p ~/.claude/skills
-unzip ~/Downloads/ax-skills-v0.2.0.zip -d ~/.claude/skills/
+unzip ~/Downloads/ax-skills-v0.2.1.zip -d ~/.claude/skills/
 ```
 
 **Windows** — 파일 탐색기 주소창에 `%USERPROFILE%\.claude\skills` 를 입력해 그 폴더로
