@@ -18,7 +18,7 @@ Claude Code 에서 첫 줄을 입력한 뒤, 위 표에서 필요한 설치 줄�
 
 그다음 Claude Code 를 완전히 껐다가 다시 켭니다.
 
-- `ax-skills` — 자세한 절차, 업데이트 방법, GitHub 이 막힌 환경에서 zip 으로 설치하는 방법은
+- `ax-skills` — 자세한 절차와 업데이트 방법은
   [`plugins/ax-skills/INSTALL.md`](plugins/ax-skills/INSTALL.md) 에 있어요.
 - `ax-deploy` — 설치부터 브라우저 로그인·연결 확인까지 [`plugins/ax-deploy/README.md`](plugins/ax-deploy/README.md) 에 있어요.
 

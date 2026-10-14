@@ -89,42 +89,8 @@ Claude Code를 열고 채팅창에 아래를 **한 줄씩** 입력하세요.
 ## 잘 안 될 때
 
 - **`/plugin marketplace add` 가 실패해요** → GitHub에 연결이 안 되는 환경일 수 있어요.
-  아래 "zip으로 설치하기"를 써주세요.
+  VPN·회사망 설정을 확인해 주세요. 사내 배포 포털도 GitHub 저장소에서 앱을 가져가므로,
+  GitHub 에 닿지 않으면 배포까지 함께 막힙니다. (zip 수동 설치는 2026-10-14 에 없앴어요.)
 - **`/` 를 눌러도 `ax-skills:` 항목이 안 보여요** → Claude Code를 **완전히 종료**했다가
   다시 켰는지 확인해 주세요. 창만 닫으면 반영되지 않을 수 있어요.
 - 그래도 안 되면 저장소 관리자에게 문의해 주세요.
-
----
-
-## zip으로 설치하기 (보조 방법)
-
-회사망에서 GitHub 접근이 막혀 있거나, 위 방법이 안 될 때만 쓰세요.
-
-### 1. 압축 풀기
-
-**Mac** — 터미널에서:
-
-```bash
-mkdir -p ~/.claude/skills
-unzip ~/Downloads/ax-skills-v0.2.1.zip -d ~/.claude/skills/
-```
-
-**Windows** — 파일 탐색기 주소창에 `%USERPROFILE%\.claude\skills` 를 입력해 그 폴더로
-간 다음, zip 파일을 우클릭 → "압축 풀기"로 그 안에 풉니다. (`skills` 폴더가 없으면
-새로 만드세요.)
-
-풀고 나면 `~/.claude/skills/ax-skills/` 안에 `.claude-plugin` 폴더가 바로 보여야 맞습니다.
-
-### 2. Claude Code 다시 켜기
-
-그게 전부예요. 확인 방법은 위와 같습니다.
-
-### zip 방식의 업데이트
-
-기존 폴더를 지우고(`~/.claude/skills/ax-skills`) 새 zip을 같은 자리에 푼 다음, Claude
-Code를 다시 켜세요.
-
-### 이 프로젝트에서만 쓰고 싶다면
-
-`~/.claude/skills/` 대신 그 프로젝트 폴더 안의 `.claude/skills/` 에 풀면 그 프로젝트에서만
-동작합니다. 처음 열 때 폴더를 신뢰할지 묻는 창이 한 번 뜹니다.

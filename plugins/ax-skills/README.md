@@ -13,7 +13,7 @@
 /plugin install ax-skills@ax-plugins
 ```
 
-자세한 절차와 zip 수동 설치 방법은 [`INSTALL.md`](INSTALL.md) 를 봐주세요.
+자세한 절차와 업데이트 방법은 [`INSTALL.md`](INSTALL.md) 를 봐주세요.
 
 ## 무엇이 들어 있나요
 

@@ -33,13 +33,9 @@ claude --plugin-dir plugins/ax-skills              # 설치 없이 이 세션에
 2. `plugins/<plugin>/.claude-plugin/plugin.json` 의 `version` 을 올립니다. **태그 버전과 같아야
    합니다** — 다르면 사용자 쪽 `/plugin update` 가 "이미 최신"이라며 조용히 아무것도 하지 않습니다.
 3. `scripts/check.sh` 통과 확인 후 커밋, annotated 태그 `<plugin>/vX.Y.Z` 를 push 합니다.
-4. (ax-skills 만) GitHub 이 막힌 환경을 위한 zip 은 GitHub Release 에 첨부합니다. **zip 안의 최상위 폴더가
-   `ax-skills/` 여야** `~/.claude/skills/` 에 그대로 풀어 쓰는 설치 방법이 동작합니다:
-   ```bash
-   rsync -a --exclude='.DS_Store' plugins/ax-skills/ /tmp/stage/ax-skills/
-   (cd /tmp/stage && zip -rq ax-skills-vX.Y.Z.zip ax-skills)
-   ```
-5. 사용자에게는 `INSTALL.md` 의 업데이트 두 줄을 안내합니다.
+   zip·GitHub Release 첨부는 하지 않습니다(2026-10-14 수동 설치 폐지 — 포털 배포가 GitHub 을
+   전제하므로 GitHub 이 막힌 환경을 따로 지원할 이유가 없다).
+4. 사용자에게는 `INSTALL.md` 의 업데이트 두 줄을 안내합니다.
 
 ## 자매 플러그인과의 관계
 
