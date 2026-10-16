@@ -40,6 +40,29 @@
 - **인증 오류(401)가 나요** → `/mcp` 에서 ax-deploy 를 골라 **Authenticate** 를 다시 해요. 90일 동안
   안 쓰면 다시 로그인해야 하고, 포털 시작하기 화면에서 그 기기 연결을 끊었을 때도 마찬가지예요.
 
+## 0.2.x 에서 올라왔다면
+
+0.3.0 부터 플러그인은 **운영(prod) 포털**에 연결해요. 0.2.x 는 개발(dev) 포털에 연결돼 있었어요.
+
+1. `/plugin update ax-deploy@ax-plugins`
+2. Claude Code 를 다시 켜고 `/mcp` 에서 ax-deploy → **Authenticate** 한 번(주소가 바뀌어 다시 로그인해요).
+
+dev 포털에 올렸던 서비스는 운영 포털로 옮겨지지 않아요. 계속 쓰려면 같은 폴더에서 "배포해줘"로
+운영 포털에 새로 올려요.
+
+## 포털 관리자: 개발(dev) 포털에 연결하기
+
+일반 사용자는 이 절이 필요 없어요. 플러그인은 운영 포털 하나에만 연결하고, 포털을 고치고 시험하는
+관리자만 dev 포털을 **다른 이름**으로 직접 추가해요.
+
+```
+claude mcp add --transport http --scope user ax-deploy-dev https://portal.ax.dev.ondaum.net/api/mcp
+```
+
+Claude Code 를 다시 켜고 `/mcp` 에서 **ax-deploy-dev** → **Authenticate**. 두 연결이 함께 보이니,
+dev 에 올릴 때는 "dev 에 배포해줘"처럼 어느 쪽인지 말해요. 이름을 `ax-deploy` 로 짓지 마세요 —
+플러그인 연결을 가려요(위 「설치」 마지막 줄).
+
 ## 0.1.x 에서 올라왔다면
 
 1. `/plugin update ax-deploy@ax-plugins` (또는 지웠다가 다시 설치)
